@@ -1,0 +1,1 @@
+- 0001-snap-cap.png — 2026-06-29 — snap-on storage cap over dome

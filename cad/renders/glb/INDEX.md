@@ -1,0 +1,2 @@
+- 0001-blender-hero.png — 2026-06-29 — Blender photoreal: mop on bottle, liquid visible
+- 0002-turntable.gif — 2026-06-29 — 36-frame Blender turntable (object-rotate, AgX)

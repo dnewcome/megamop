@@ -1,0 +1,2 @@
+- 0001-domecap.png — 2026-06-29 — angled neck + perforated dome cap
+- 0002-domecap-section.png — 2026-06-29 — section

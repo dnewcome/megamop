@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+
+# Local Claude config (machine-specific permissions)
+.claude/
+
+# Generated CAD intermediates (regenerable by running the scripts)
+cad/build/asm_*.stl
+cad/build/glb_*.stl
+cad/build/*.scad
+
+# Keep: printable STLs, render PNGs, megamop.glb, the turntable gif/mp4
