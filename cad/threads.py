@@ -19,7 +19,7 @@ from build123d import (
 
 
 def thread_ribs(mean_r, pitch, starts, length, depth, external=True,
-                crest_frac=0.35, root_frac=0.80, hand_right=True, weld=0.5,
+                crest_frac=0.18, root_frac=0.40, hand_right=True, weld=0.5,
                 z0=0.0):
     """Return a list of `starts` thread-rib solids (fuse them onto the body).
 

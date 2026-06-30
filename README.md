@@ -56,7 +56,7 @@ ffmpeg -framerate 20 -i cad/build/turntable_%03d.png -i /tmp/p.png -lavfi palett
 |------|--------------|
 | **base** / **base_angled** | screws onto the bottle (internal Gatorade thread), feeds paint up a Ø26 passage (bent through a cylinder-elbow on the angled one) into a ~2" wick chamber, carries an **external** thread for the cap |
 | **dome_cap** | screws on; perforated spherical dome retains the wick, bulges past the rim, bleeds paint through a hole grid — *fully printed, replaces the mesh* |
-| **dome_ring** + **dome_tpu** | flexible 2-piece version: rigid PETG ring (`dome_ring`) clamps a soft **TPU** perforated dome (`dome_tpu`) that conforms to the wall and won't crack |
+| **dome_ring** + **dome_tpu** | flexible 2-piece version: rigid PETG ring (`dome_ring`) clamps a soft **TPU** perforated dome (`dome_tpu`, two flex variants — `stiff`/`soft`) that conforms to the wall and won't crack |
 | **collar** *(alt.)* | flat-lip retainer that clamps a separate mesh disc instead of the dome |
 | **cap** | snap-on storage cover — grabs the dome-cap ring (slotted skirt + detents), keeps the wick wet and the dome from smearing in a bag |
 | wick *(buy)* | ~Ø50 open-cell foam **or** felt pad — holds/meters the paint |
@@ -68,19 +68,18 @@ through the dome holes (or mesh) onto the wall.
 
 ## ⚠️ Print the test coupon FIRST
 
-The whole design hangs on one uncertain number: the Gatorade bottle thread. The community
-spec (Ø38, **2-start**, ~7.2 coarse) is reverse-engineered and the *pitch-vs-lead* split is
-unverified. Before printing the real parts:
+The bottle thread is fully pinned: ~38 mm dia (38-400 T/E: 37.19 / 34.80 mm), **2-start**
+(two entries 180° apart), **measured pitch 3.0 mm → lead 6.0 mm**. The coupons just dial the
+FDM clearance before you commit to the full base:
 
 ```bash
-cd cad && python3 coupon.py      # -> build/coupon_A_lead7.2.stl  (1 nub on rim)
-                                 #    build/coupon_B_lead14.4.stl (2 nubs on rim)
+cd cad && python3 coupon.py      # -> build/coupon_snug.stl  (clearance 0.30, 1 nub)
+                                 #    build/coupon_loose.stl (clearance 0.40, 2 nubs)
 ```
 
-Print **both** (each ~15 mm tall), screw onto a real bottle, and tell me which threads on
-cleanly (or "both loose"/"both bind"). Better yet, caliper the bottle threads. Everything
-is parameterized in `cad/machine_params.py`, so once a coupon fits, every part inherits the
-correct thread.
+Print **both** (~12 mm rings), screw onto the bottle, use whichever threads on snug + clean;
+put that value in `THREAD_CLEAR_R`. Everything is parameterized in `cad/machine_params.py`,
+so once a coupon fits, every part inherits the correct thread.
 
 ## Build / regenerate
 
@@ -91,7 +90,7 @@ python3 base.py           # straight body      -> build/base.stl
 python3 base_angled.py    # angled-neck body   -> build/base_angled.stl
 python3 dome_cap.py       # perforated dome (1pc) -> build/dome_cap.stl
 python3 dome_ring.py      # rigid retainer ring   -> build/dome_ring.stl   (PETG)
-python3 dome_tpu.py       # flexible perf. dome   -> build/dome_tpu.stl    (TPU)
+python3 dome_tpu.py       # flexible perf. dome (TPU) -> dome_tpu_{stiff,soft}.stl + dome_tpu.stl
 python3 collar.py         # flat collar (alt.) -> build/collar.stl
 python3 cap.py            # snap-on storage cap -> build/cap.stl
 python3 machine.py          # straight assembly + renders
@@ -113,9 +112,13 @@ All parts self-verify on build (watertight / single-body / bbox printout).
 - **dome_cap:** print **ring-down / dome-up**. The dome is a perforated shell, so the
   upper (shallow) portion near the apex may want a touch of support or a well-tuned bridge;
   the holes are small enough to bridge. If it's fussy, drop `DOME_RISE` or add supports.
-- **dome_ring:** rigid (PETG/PLA), threads-down.
-- **dome_tpu:** **TPU (~95A)**, flange-down / dome-up. Slow it down, no/low retraction; the
-  thin `DTPU_T` 1.8 mm shell + holes give the flex. Tune softness with `DTPU_T` and durometer.
+- **dome_ring:** rigid (PETG/PLA), threads-down. *Never print threads in TPU* — they delaminate
+  in shear; that's why the thread lives on this rigid ring and the soft face is a separate part.
+- **dome_tpu:** **TPU (~95A)**, flange-down / dome-up. Slow, no/low retraction. Two flex variants
+  (`stiff`/`soft`) — print both and pick; soften further with thinner shell or lower durometer.
+- **Two-piece tip is two SEPARATE single-material prints** (ring in PETG, dome in TPU) — no
+  multi-material needed. If you do one plate: keep them separate objects, assign a filament each,
+  and run TPU from the **external spool** (it jams in the AMS). The parts clamp together after.
 - **collar:** print **aperture-face-down** (lip flat on the bed).
 - **cap:** print **closed-top-down** (flat top on the bed); slots and grip print vertically,
   the internal snap detents are small bridged overhangs. Tune snap force with `CAP_DETENT`.

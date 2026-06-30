@@ -23,13 +23,18 @@ from build123d import Location, Pos, Rot
 # ---------------------------------------------------------------------------
 # 1. GATORADE BOTTLE THREAD  (controlling interface — VERIFY with cad/coupon.py)
 # ---------------------------------------------------------------------------
-BOTTLE_THREAD_MAJOR_D = 38.0   # bottle external thread crest diameter (mm)
-BOTTLE_THREAD_PITCH   = 3.6    # axial crest-to-crest spacing; LEAD = PITCH*STARTS
-BOTTLE_THREAD_STARTS  = 2      # the "weird" part: double-start, coarse
-BOTTLE_THREAD_DEPTH   = 1.4    # radial thread depth crest->root (guess)
-BOTTLE_THREAD_LEN     = 11.0   # axial length of threaded engagement on the neck
-BOTTLE_MOUTH_ID       = 32.0   # bore of the bottle mouth (the paint passage)
-BOTTLE_NECK_OD        = 39.5   # outside of neck below threads (skirt clears this)
+# DIAMETER follows the 38-400 standard (T = 37.19 across peaks, E = 34.80 at root; calipers
+# read ~37.5). But the THREAD IS DOUBLE-START: the real bottle has TWO thread entries 180deg
+# apart, each wrapping only ~180-200deg -> a 2-START thread (a sports-bottle variant on a 38mm
+# neck; the published "400" is single-start, but Gatorade's actual neck is not).
+# MEASURED adjacent crest-to-crest spacing along the neck = 3.0mm -> with 2 starts, LEAD = 6.0mm.
+BOTTLE_THREAD_MAJOR_D = 37.19      # 38-400 "T", across the thread peaks
+BOTTLE_THREAD_ROOT_D  = 34.80      # 38-400 "E", neck OD at the thread root
+BOTTLE_THREAD_DEPTH   = (BOTTLE_THREAD_MAJOR_D - BOTTLE_THREAD_ROOT_D) / 2   # ~1.2mm
+BOTTLE_THREAD_STARTS  = 2          # DOUBLE-start (two entries 180deg apart) — seen on the bottle
+BOTTLE_THREAD_PITCH   = 3.0        # MEASURED adjacent-crest spacing -> LEAD = PITCH*STARTS = 6.0mm
+BOTTLE_THREAD_LEN     = 10.0       # threaded engagement length on the neck
+BOTTLE_MOUTH_ID       = 31.1       # 38-400 "I" inner diameter (the paint passage)
 
 THREAD_CLEAR_R        = 0.35   # radial clearance, female-vs-male, for FDM fit
 
@@ -113,9 +118,10 @@ DTPU_BASE_R    = 24.0     # dome springs from here (Ø48 application face, ~1.9"
 DTPU_FLANGE_R  = CUP_OUTER_R         # flange OD = cup rim (28), clamped on the rim
 DTPU_THROAT_R  = 19.0     # central hole the proud wick pokes through into the dome
 DTPU_FLANGE_T  = 2.0      # TPU flange thickness (clamped/compressed by the ring lip)
-DTPU_RISE      = 14.0     # dome rise above the flange (bulges past the ring)
-DTPU_T         = 1.8      # TPU shell thickness — thin for flex
-DTPU_HOLE_D    = 3.6      # perforation holes
+# Print-test feedback: the dome was too stiff to flatten against a wall. A spherical shell
+# resists inward load (arch action), so: thinner shell (stiffness ~ t^3), flatter dome (less
+# arch), and more-open perforation lower the force to conform. TWO flex variants are kept —
+# 'stiff' (original) and 'soft' (revision) — defined in dome_tpu.py VARIANTS; print both to compare.
 DRING_APERTURE_R = 25.0   # rigid-ring opening the TPU dome bulges through (Ø50)
 DRING_LIP_T    = 3.0      # rigid-ring clamping lip thickness
 
