@@ -32,6 +32,34 @@ from an inverted reservoir, hand-triggered, and still be **cleanable**.
 viscous paint wants **wide passages + cleanable (ball) valves**; o-rings/gaskets are needed
 anywhere pressure is held (printed threads alone won't seal).
 
+## Leading idea — trigger-pumped AIR, valve-phased (refined)
+Pump **air** (not paint) into the inverted bottle's headspace through a dip-tube, pressurizing it
+to push paint out the tip; the *same* trigger also gates a pinch valve. **Key win: the pump only
+moves air, so it never clogs** — the only paint-wetted moving part is a replaceable pinch tube at
+the tip. (It's a pump-pot / pressurized sprayer, with the pump + valve folded into the trigger.)
+
+How it goes together:
+- **Air pump on the trigger** — a TPU bellows/diaphragm is ideal (printable, no sliding seal).
+- **Intake check valve** — admits air on the return stroke.
+- **Air dip-tube up to the headspace**, with a **one-way (umbrella/duckbill) valve at its top** so
+  paint can't come back down the air tube when the tool is tilted.
+- **Sealed neck cap (o-ring)** so the bottle holds a few psi.
+- **Pressure-relief valve** (the "pressure check") to cap pressure — a Gatorade bottle isn't
+  pressure-rated, so keep it low.
+- **Spring-loaded pinch valve at the tip** — released = pinched (positive shutoff, no dribble);
+  pulled = open.
+
+**The trigger "balance" (the clever core):** phase the linkage (cam / lost-motion) so the **valve
+opens early in the pull and stays open**, the **air pump strokes through the later travel**, and
+the **valve only re-closes at full release**. So you can *half-pump* from a part-pulled position to
+keep topping up pressure while paint keeps flowing — the balance described. Tunable via the cam
+profile; a MuJoCo sim of the linkage would dial the timing.
+
+Tradeoffs: some paints foam under pressurized air; paint can creep into the air tube if tilted
+(umbrella valve mitigates); low pressure only; more parts than a squeeze mop. But pumping air, not
+paint, is what makes it practical.
+
+## Pragmatic path
 **Pragmatic path:** start with #1 (a trigger pinch-valve for drip control on the existing squeeze
 action) — achievable and cleanable — then graduate to #2 if you want true metered pumping. This is
 `build123d-machine` territory (multi-part mechanism + mates), and a good candidate for a `kickoff`
