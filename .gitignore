@@ -8,6 +8,8 @@ __pycache__/
 # Generated CAD intermediates (regenerable by running the scripts)
 cad/build/asm_*.stl
 cad/build/glb_*.stl
+cad/build/ct_*.stl
+cad/build/ct_preview.png
 cad/build/*.scad
 
 # Keep: printable STLs, render PNGs, megamop.glb, the turntable gif/mp4

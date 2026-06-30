@@ -147,6 +147,6 @@ Done: straight + 20° angled bodies; three tip closures (flat collar, 1-piece pr
   need geometry work at 90° (sharper turn, inside-of-bend wall).
 - **Dome / screen tweaks** — iterate the perforation + flex after field-testing the soft dome.
 - **Trigger-handle pressurized version** *(bigger pivot)* — bottle inverted (gravity feed), a
-  trigger to pump/squeeze paint out, pressurized feed. A pump/valve mechanism (sealed joints,
-  check valves, trigger linkage) rather than a squeeze-bottle mop.
+  trigger to pump/squeeze paint out. Form study + candidate mechanisms in
+  [concept-trigger.md](concept-trigger.md) (interesting, mechanism not yet resolved).
 - Earlier deferred: chisel/angled *face*, drip control.
