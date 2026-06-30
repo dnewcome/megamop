@@ -33,6 +33,10 @@ viscous paint wants **wide passages + cleanable (ball) valves**; o-rings/gaskets
 anywhere pressure is held (printed threads alone won't seal).
 
 ## Leading idea — trigger-pumped AIR, valve-phased (refined)
+
+![cutaway schematic](cad/build/concept_trigger_cutaway.png)
+*(regenerate: `python3 cad/concept_trigger_cutaway.py` — air path blue, paint path amber)*
+
 Pump **air** (not paint) into the inverted bottle's headspace through a dip-tube, pressurizing it
 to push paint out the tip; the *same* trigger also gates a pinch valve. **Key win: the pump only
 moves air, so it never clogs** — the only paint-wetted moving part is a replaceable pinch tube at
