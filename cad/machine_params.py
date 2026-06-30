@@ -130,15 +130,28 @@ DRING_LIP_T    = 3.0      # rigid-ring clamping lip thickness
 #     drying / smearing. Grabs the dome-cap ring (no thread; the cup thread is taken),
 #     slotted skirt detents hook under the ring's bottom edge.
 # ---------------------------------------------------------------------------
-CAP_CLEAR     = 0.4                          # radial clearance over the dome-cap ring
-CAP_WALL      = 2.5
+CAP_CLEAR     = 0.7                          # radial slip clearance over the dome-cap ring.
+# NOTE: this also sets how far the detents must flex to pass the ring (= CAP_CLEAR..CAP_CLEAR+? ).
+# Detent tip lands at CAP_INNER_R - CAP_DETENT; interference over the ring OD = CAP_DETENT - CAP_CLEAR
+# (1.4-0.7 = 0.7mm catch). Was 0.4 -> 1.0mm interference, which printed "too tight to go on" in PETG.
+CAP_WALL      = 2.0   # thinned from 2.5: skirt flex force ~ wall^3, so 2.5->2.0 ~= half the snap force
+                      # (this cap is held by snap detents, NOT threads, so a softer wall is fine here;
+                      #  TPU would go further but inverts the tuning — needs MORE detent to retain)
 CAP_INNER_R   = COLLAR_OUTER_R + CAP_CLEAR   # slips over the Ø68 dome-cap ring
 CAP_OUTER_R   = CAP_INNER_R + CAP_WALL
 CAP_DOME_CLR  = 2.5                          # axial clearance over the dome apex
 CAP_RIM_BELOW = 3.0                          # cap rim sits this far below the ring bottom
 CAP_CAVITY_H  = (DOME_RING_H + DOME_RISE) + CAP_RIM_BELOW + CAP_DOME_CLR
-CAP_DETENT    = 1.4                          # rounded bead that hooks under the ring
-CAP_N_SNAP    = 6                            # slotted flex segments / detents
+CAP_N_SNAP    = 6                            # slotted flex segments
+# Friction-taper retention (replaces the snap detents): an internal LAND the dome-ring top
+# rests against (positive seated stop), plus tapered WEDGE ribs on the skirt that grip the ring
+# OD with friction that grows as it seats and releases gradually on pull-off (no snap threshold).
+CAP_LAND_IR     = 27.0   # inner radius of the land the dome-ring TOP face rests on. Must clear the
+                         # dome bulge (rigid base Ø50 / TPU base Ø48) yet overlap the ring top
+                         # annulus (Ø50..Ø66) -> ~Ø54..Ø66 face contact = the axial stop.
+CAP_WEDGE_INTERF = 0.5   # radial interference at the TOP (seated) end of the friction wedges;
+                         # tapers to ~0 at the rim end -> continuous friction grip, not a snap bead.
+CAP_DETENT    = 1.4                          # LEGACY (old snap bead); kept so older scripts import OK
 
 # ---------------------------------------------------------------------------
 # 5. CONSUMABLES (assembly stand-ins only — sourced, not printed)

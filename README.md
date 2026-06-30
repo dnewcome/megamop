@@ -58,7 +58,7 @@ ffmpeg -framerate 20 -i cad/build/turntable_%03d.png -i /tmp/p.png -lavfi palett
 | **dome_cap** | screws on; perforated spherical dome retains the wick, bulges past the rim, bleeds paint through a hole grid — *fully printed, replaces the mesh* |
 | **dome_ring** + **dome_tpu** | flexible 2-piece version: rigid PETG ring (`dome_ring`) clamps a soft **TPU** perforated dome (`dome_tpu`, two flex variants — `stiff`/`soft`) that conforms to the wall and won't crack |
 | **collar** *(alt.)* | flat-lip retainer that clamps a separate mesh disc instead of the dome |
-| **cap** | snap-on storage cover — grabs the dome-cap ring (slotted skirt + detents), keeps the wick wet and the dome from smearing in a bag |
+| **cap** | push-on storage cover — slips over the dome-cap ring; an internal land stops it at a repeatable depth while tapered friction wedges down the slotted skirt grip the ring (no snap-over), keeping the wick wet and the dome from smearing in a bag |
 | wick *(buy)* | ~Ø50 open-cell foam **or** felt pad — holds/meters the paint |
 | mesh *(buy, only with collar)* | ~Ø54 stainless/Kevlar disc |
 
@@ -120,8 +120,9 @@ All parts self-verify on build (watertight / single-body / bbox printout).
   multi-material needed. If you do one plate: keep them separate objects, assign a filament each,
   and run TPU from the **external spool** (it jams in the AMS). The parts clamp together after.
 - **collar:** print **aperture-face-down** (lip flat on the bed).
-- **cap:** print **closed-top-down** (flat top on the bed); slots and grip print vertically,
-  the internal snap detents are small bridged overhangs. Tune snap force with `CAP_DETENT`.
+- **cap:** print **closed-top-down** (flat top on the bed); slots and grip print vertically.
+  The internal land's underside is a 45° cone (self-supporting); the taper wedges print as part
+  of the skirt. Tune hold with `CAP_WEDGE_INTERF` (friction) and seat depth with `CAP_LAND_IR`.
 - 3+ perimeters, 0.2 mm layers. Coarse threads usually print support-free; the coupon confirms.
 
 ## Assembly (dome-cap version)
@@ -135,7 +136,8 @@ All parts self-verify on build (watertight / single-body / bbox printout).
 
 `BOTTLE_THREAD_*` (verify w/ coupon) · `WICK_D` 50 (~2") · `CANT_DEG` 20 (angled tilt) ·
 `DOME_RISE` 14 / `DOME_T` 2.6 / `DOME_HOLE_D` 3.6 (dome) · `DTPU_T` 1.8 (TPU flex) ·
-`CAP_DETENT` 1.4 (snap force) · `THREAD_CLEAR_R` 0.35 (FDM fit) · `CUP_THREAD_*` (base↔cap thread).
+`CAP_WEDGE_INTERF` 0.5 (cap friction hold) · `CAP_LAND_IR` 27 (cap seat stop) ·
+`THREAD_CLEAR_R` 0.35 (FDM fit) · `CUP_THREAD_*` (base↔cap thread).
 
 ## Status / deferred
 Done: straight + 20° angled bodies; three tip closures (flat collar, 1-piece printed dome,
