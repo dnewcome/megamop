@@ -138,6 +138,15 @@ All parts self-verify on build (watertight / single-body / bbox printout).
 `CAP_DETENT` 1.4 (snap force) · `THREAD_CLEAR_R` 0.35 (FDM fit) · `CUP_THREAD_*` (base↔cap thread).
 
 ## Status / deferred
-Done: straight + angled bodies; three tip closures (flat collar, 1-piece printed dome,
-2-piece rigid-ring + flexible TPU dome); snap-on storage cap; test coupons.
-Deferred: chisel/angled *face*, drip control.
+Done: straight + 20° angled bodies; three tip closures (flat collar, 1-piece printed dome,
+2-piece rigid-ring + flexible TPU dome, with stiff/soft dome variants); snap-on storage cap;
+**bottle thread validated on hardware** (38-400, 2-start, pitch 3.0, thin profile).
+
+## Roadmap / ideas
+- **Full 90° neck variant** — `CANT_DEG` bump from 20°; the cylinder-elbow + bored passage will
+  need geometry work at 90° (sharper turn, inside-of-bend wall).
+- **Dome / screen tweaks** — iterate the perforation + flex after field-testing the soft dome.
+- **Trigger-handle pressurized version** *(bigger pivot)* — bottle inverted (gravity feed), a
+  trigger to pump/squeeze paint out, pressurized feed. A pump/valve mechanism (sealed joints,
+  check valves, trigger linkage) rather than a squeeze-bottle mop.
+- Earlier deferred: chisel/angled *face*, drip control.
